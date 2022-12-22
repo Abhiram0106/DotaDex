@@ -47,6 +47,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
+//    ViewModel lifecycle
+    def lifecycle_version = "2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
 //    Ktor
 //    https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html#prerequisites
 //    https://ktor.io/docs/getting-started-ktor-client.html#create-client
@@ -59,10 +63,23 @@ dependencies {
     implementation "io.ktor:ktor-client-core:$ktor_version"
     implementation "io.ktor:ktor-client-android:$ktor_version"
     implementation "io.ktor:ktor-client-logging:$ktor_version"
+    // SLF4J Logger
     implementation "ch.qos.logback:logback-classic:$logback_version"
     implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
     implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
 
 //    Kotlinx Serialization required for Ktor serialization
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+
+//    Koin
+    def koin_android_version= "3.3.1"
+    implementation "io.insert-koin:koin-android:$koin_android_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
+    def koin_ktor= "3.2.2"
+    // Koin for Ktor
+    implementation "io.insert-koin:koin-ktor:$koin_ktor"
+    // SLF4J Logger
+    implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
+
 }
