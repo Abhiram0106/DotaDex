@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -81,5 +84,8 @@ dependencies {
     implementation "io.insert-koin:koin-ktor:$koin_ktor"
     // SLF4J Logger
     implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
+
+//    Coil
+    implementation "io.coil-kt:coil:2.2.2"
 
 }

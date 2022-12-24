@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/padding_small">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/siv_heroImage"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="@dimen/padding_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/roundedImage"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_heroName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_small"
+        app:layout_constraintBottom_toTopOf="@+id/tv_primaryAttribute"
+        app:layout_constraintStart_toEndOf="@id/siv_heroImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:text="@string/hero_name" />
+
+    <TextView
+        android:id="@+id/tv_primaryAttribute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_heroName"
+        app:layout_constraintTop_toBottomOf="@+id/tv_heroName"
+        tools:text="@string/primary_attribute" />
+
+    <TextView
+        android:id="@+id/tv_winRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_small"
+        app:layout_constraintBottom_toBottomOf="@id/siv_heroImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/siv_heroImage"
+        tools:text="@string/win_rate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

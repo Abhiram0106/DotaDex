@@ -14,19 +14,5 @@ interface PostService {
 
     suspend fun getHeroes() : List<HeroItemDto>
 
-//    TODO implement dependency injection
-//    companion object {
-//        fun create(): PostService {
-//            return PostServiceImpl(
-//                client = HttpClient(Android) {
-//                    install(Logging) {
-//                        level = LogLevel.ALL
-//                    }
-//                    install(ContentNegotiation) {
-//                        json()
-//                    }
-//                }
-//            )
-//        }
-//    }
+
 }

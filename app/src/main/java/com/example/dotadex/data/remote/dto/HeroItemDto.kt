@@ -69,6 +69,7 @@ fun HeroItemDto.toHero(): Hero {
         id = id,
         img = img,
         localized_name = localized_name,
+        pro_win = pro_win,
         name = name,
         primary_attr = primary_attr,
         roles = roles

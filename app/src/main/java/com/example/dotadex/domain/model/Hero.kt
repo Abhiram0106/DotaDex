@@ -11,5 +11,6 @@ data class Hero(
     val localized_name: String,
     val name: String,
     val primary_attr: String,
+    val pro_win: Int,
     val roles: List<String>
 )
