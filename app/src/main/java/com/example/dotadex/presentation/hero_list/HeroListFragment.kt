@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dotadex.databinding.FragmentHeroListBinding
@@ -15,6 +18,7 @@ import com.example.dotadex.domain.model.Hero
 import com.example.dotadex.domain.model.HeroListUiState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HeroListFragment : Fragment() {
@@ -49,26 +53,33 @@ class HeroListFragment : Fragment() {
         )
         heroListAdapter.submitList(tempList)
 
-        binding.fabHero.setOnClickListener {
-            viewModel.fetchHeroes()
-        }
+//        binding.fabHero.setOnClickListener {
+//            viewModel.fetchHeroes()
+//        }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.stateFlow.collect {
-                when(it) {
-                    is HeroListUiState.Success -> {
-                        Log.d("data", it.heroList.toString())
-                        heroListAdapter.submitList(it.heroList)
+//        lifecycleScope.launchWhenStarted {} ctrl click on .launchWhenStarted
+        lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//            .repeatOnLifecycle(Lifecycle.State.STARTED) is useful when collecting multiple flows
+//            But for single, .flowWithLifecycle is suitable
+//            https://youtu.be/fSB6_KE95bU?t=717
+                viewModel.stateFlow.flowWithLifecycle(lifecycle = lifecycle, minActiveState = Lifecycle.State.STARTED).collect {
+                viewModel.stateFlow.collect {
+                    when (it) {
+                        is HeroListUiState.Success -> {
+                            Log.d("data", it.heroList.toString())
+                            heroListAdapter.submitList(it.heroList)
+                        }
+                        is HeroListUiState.Error -> {
+                            Snackbar.make(view, it.message, Snackbar.LENGTH_SHORT).show()
+                            Log.d("data", it.message)
+                        }
+                        is HeroListUiState.Loading -> {
+                            Snackbar.make(view, "Loading", Snackbar.LENGTH_SHORT).show()
+                            Log.d("data", "Loading")
+                        }
+                        else -> Unit
                     }
-                    is HeroListUiState.Error -> {
-                        Snackbar.make(view, it.message, Snackbar.LENGTH_SHORT).show()
-                        Log.d("data", it.message)
-                    }
-                    is HeroListUiState.Loading -> {
-                        Snackbar.make(view, "Loading", Snackbar.LENGTH_SHORT).show()
-                        Log.d("data", "Loading")
-                    }
-                    else -> Unit
                 }
             }
         }

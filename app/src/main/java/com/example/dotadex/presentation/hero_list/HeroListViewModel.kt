@@ -6,7 +6,9 @@ import com.example.dotadex.data.remote.dto.toHero
 import com.example.dotadex.data.remote.repository.HeroRepositoryImpl
 import com.example.dotadex.domain.model.HeroListUiState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class HeroListViewModel(
@@ -14,9 +16,14 @@ class HeroListViewModel(
 ): ViewModel() {
 
     private val _stateFlow = MutableStateFlow<HeroListUiState>(HeroListUiState.Empty)
-    val stateFlow: StateFlow<HeroListUiState> = _stateFlow
+    val stateFlow: StateFlow<HeroListUiState> = _stateFlow.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), HeroListUiState.Empty)
+//    the .stateIn explained in https://youtu.be/fSB6_KE95bU?t=981
 
-    fun fetchHeroes() = viewModelScope.launch {
+    init {
+        fetchHeroes()
+    }
+
+    private fun fetchHeroes() = viewModelScope.launch {
         _stateFlow.value = HeroListUiState.Loading
 
         try {
