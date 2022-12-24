@@ -1,10 +1,7 @@
 package com.example.dotadex.presentation.hero_list
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +20,7 @@ class HeroListRecyclerAdapter(
             tvHeroName.text = hero.localized_name
             tvPrimaryAttribute.text = hero.primary_attr
             tvWinRate.text = tvWinRate.context.getString(R.string.win_rate, hero.pro_win)
-            val url = "${Constants.HERO_RESOURCE_PREPEND}${hero.img}"
-            Log.d("TESTING URL", url)
-            sivHeroImage.load(url){
+            sivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}"){
                 placeholder(R.drawable.ic_baseline_downloading_24)
                 crossfade(true)
                 crossfade(400)
