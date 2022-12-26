@@ -3,4 +3,11 @@
     <string name="hero_name">%1$s</string>
     <string name="primary_attribute">%1$s</string>
     <string name="win_rate">%1$d wins</string>
+    <string name="agility">Agility</string>
+    <string name="strength">Strength</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="error">Error</string>
+
+
+
 </resources>

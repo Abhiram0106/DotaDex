@@ -12,21 +12,29 @@ import com.example.dotadex.databinding.HeroListItemBinding
 import com.example.dotadex.domain.model.Hero
 
 class HeroListRecyclerAdapter(
-    private var heroClickListener: ( (hero: Hero) -> Unit )
+    private var heroClickListener: ( (heroID: Int) -> Unit )
 ) : ListAdapter<Hero, HeroListRecyclerAdapter.HeroesListViewHolder>(HeroesDiffUtilCallBack()) {
 
     inner class HeroesListViewHolder(private val binding: HeroListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(hero: Hero) = binding.apply {
             tvHeroName.text = hero.localized_name
-            tvPrimaryAttribute.text = hero.primary_attr
+
+            tvPrimaryAttribute.text = when(hero.primary_attr) {
+                "agi" -> tvPrimaryAttribute.context.getString(R.string.agility)
+                "str" -> tvPrimaryAttribute.context.getString(R.string.strength)
+                "int" -> tvPrimaryAttribute.context.getString(R.string.intelligence)
+                else -> tvPrimaryAttribute.context.getString(R.string.error)
+            }
+
             tvWinRate.text = tvWinRate.context.getString(R.string.win_rate, hero.pro_win)
             sivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}"){
                 placeholder(R.drawable.ic_baseline_downloading_24)
                 crossfade(true)
                 crossfade(400)
             }
+
             binding.root.setOnClickListener {
-                heroClickListener(hero)
+                heroClickListener(hero.id)
             }
         }
     }

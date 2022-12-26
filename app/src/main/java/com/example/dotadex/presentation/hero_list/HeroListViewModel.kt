@@ -3,8 +3,8 @@ package com.example.dotadex.presentation.hero_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dotadex.data.remote.dto.toHero
-import com.example.dotadex.data.remote.repository.HeroRepositoryImpl
 import com.example.dotadex.domain.model.HeroListUiState
+import com.example.dotadex.domain.repository.HeroRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class HeroListViewModel(
-    private val repository: HeroRepositoryImpl
+    private val repository: HeroRepository
 ): ViewModel() {
 
     private val _stateFlow = MutableStateFlow<HeroListUiState>(HeroListUiState.Empty)

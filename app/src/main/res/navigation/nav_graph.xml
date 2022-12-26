@@ -9,5 +9,14 @@
         android:id="@+id/heroListFragment"
         android:name="com.example.dotadex.presentation.hero_list.HeroListFragment"
         android:label="HeroListFragment"
-        tools:layout="@layout/fragment_hero_list"/>
+        tools:layout="@layout/fragment_hero_list">
+        <action
+            android:id="@+id/action_heroListFragment_to_heroDetailFragment"
+            app:destination="@id/heroDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/heroDetailFragment"
+        android:name="com.example.dotadex.presentation.hero_detail.HeroDetailFragment"
+        android:label="HeroDetailFragment"
+        tools:layout="@layout/fragment_hero_detail"/>
 </navigation>
