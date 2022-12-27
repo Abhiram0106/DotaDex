@@ -3,10 +3,14 @@ package com.example.dotadex.presentation.hero_list
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dotadex.R
@@ -16,7 +20,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HeroListFragment : Fragment(R.layout.fragment_hero_list) {
+class
+HeroListFragment : Fragment(R.layout.fragment_hero_list) {
 
     private var _binding: FragmentHeroListBinding? = null
     private val binding get() = _binding!!
@@ -27,9 +32,18 @@ class HeroListFragment : Fragment(R.layout.fragment_hero_list) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHeroListBinding.bind(view)
 
+        postponeEnterTransition()
+
         val heroListAdapter = HeroListRecyclerAdapter(
-            heroClickListener = { heroID ->
+            heroClickListener = { heroID, imgView, txtView ->
                 Snackbar.make(view, heroID.toString(), Snackbar.LENGTH_SHORT).show()
+                val extras = FragmentNavigatorExtras(imgView to "detail_img", txtView to "detail_name")
+                findNavController().navigate(
+                    R.id.action_heroListFragment_to_heroDetailFragment,
+                    null,
+                    null,
+                    extras
+                )
             }
         )
 
@@ -69,6 +83,10 @@ class HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                 LinearLayoutManager(binding.rvHeroList.context, RecyclerView.VERTICAL, false)
             hasFixedSize()
             adapter = heroListAdapter
+        }
+
+        (view.parent as? ViewGroup)?.doOnPreDraw {
+            startPostponedEnterTransition()
         }
 
     }

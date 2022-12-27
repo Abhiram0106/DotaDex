@@ -2,6 +2,9 @@ package com.example.dotadex.presentation.hero_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +15,7 @@ import com.example.dotadex.databinding.HeroListItemBinding
 import com.example.dotadex.domain.model.Hero
 
 class HeroListRecyclerAdapter(
-    private var heroClickListener: ( (heroID: Int) -> Unit )
+    private var heroClickListener: ( (heroID: Int, imgView: ImageView, txtView: TextView) -> Unit )
 ) : ListAdapter<Hero, HeroListRecyclerAdapter.HeroesListViewHolder>(HeroesDiffUtilCallBack()) {
 
     inner class HeroesListViewHolder(private val binding: HeroListItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -33,8 +36,11 @@ class HeroListRecyclerAdapter(
                 crossfade(400)
             }
 
+            ViewCompat.setTransitionName(sivHeroImage, "hero_img_${hero.id}")
+            ViewCompat.setTransitionName(tvHeroName, "hero_name_${hero.id}")
+
             binding.root.setOnClickListener {
-                heroClickListener(hero.id)
+                heroClickListener(hero.id, sivHeroImage, tvHeroName)
             }
         }
     }
