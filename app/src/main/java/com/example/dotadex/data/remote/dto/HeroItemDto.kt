@@ -1,8 +1,11 @@
 package com.example.dotadex.data.remote.dto
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.dotadex.domain.model.Hero
 
 @kotlinx.serialization.Serializable
+@Entity(tableName = "heroes_table")
 data class HeroItemDto(
     val `1_pick`: Int,
     val `1_win`: Int,
@@ -38,7 +41,7 @@ data class HeroItemDto(
     val cm_enabled: Boolean,
     val hero_id: Int,
     val icon: String,
-    val id: Int,
+    @PrimaryKey val id: Int,
     val img: String,
     val int_gain: Double,
     val legs: Int,

@@ -15,5 +15,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/hero_list_item"/>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
