@@ -37,11 +37,10 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
         val heroListAdapter = HeroListRecyclerAdapter(
             heroClickListener = { heroID, imgView, txtView ->
                 Snackbar.make(view, heroID.toString(), Snackbar.LENGTH_SHORT).show()
+                val action = HeroListFragmentDirections.actionHeroListFragmentToHeroDetailFragment(heroID)
                 val extras = FragmentNavigatorExtras(imgView to "detail_img", txtView to "detail_name")
                 findNavController().navigate(
-                    R.id.action_heroListFragment_to_heroDetailFragment,
-                    null,
-                    null,
+                    action,
                     extras
                 )
             }

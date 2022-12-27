@@ -14,7 +14,13 @@ class PostServiceImpl(
     private val client: HttpClient
 ) {
     suspend fun getHeroes() : List<HeroItemDto> {
-        return client.get(urlString = Constants.HERO_STATS).body()
+        val response = client.get(urlString = Constants.HERO_STATS)
+
+        if(response.status.value in 200..299 ) {
+            return response.body()
+        }
+        return emptyList()
+//        TODO : Manager network errors, propagate errors to user
     }
 
     companion object {

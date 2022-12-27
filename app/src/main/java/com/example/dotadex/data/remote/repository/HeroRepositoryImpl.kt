@@ -15,9 +15,10 @@ class HeroRepositoryImpl(
 
 
     override suspend fun getHeroes(): Flow<List<HeroItemDto>> {
-        val wtf = service.getHeroes()
-        val what = listOf(wtf).asFlow()
-        return what
+        val heroList = service.getHeroes()
+        insertHero(heroList)
+        val heroListAsFlow = listOf(heroList).asFlow()
+        return heroListAsFlow
 
 //        TODO : check for internet connection using work manager to decide data source
     }
@@ -26,6 +27,17 @@ class HeroRepositoryImpl(
     @WorkerThread
     override suspend fun insertHero(heroItemDto: HeroItemDto) {
         heroDao.insertHero(heroItemDto)
+    }
+
+    @WorkerThread
+    override suspend fun insertHero(listOfHeroItemDto: List<HeroItemDto>) {
+        listOfHeroItemDto.forEach {
+            heroDao.insertHero(it)
+        }
+    }
+
+    override suspend fun getHeroById(heroID: Int): Flow<HeroItemDto> {
+        return heroDao.getHeroById(heroID)
     }
 
 }

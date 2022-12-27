@@ -13,6 +13,9 @@ interface HeroDao {
     @Query("SELECT * FROM heroes_table ORDER BY id ASC")
     fun getHeroes(): Flow<List<HeroItemDto>>
 
+    @Query("SELECT * FROM heroes_table WHERE id = :heroID")
+    fun getHeroById(heroID: Int): Flow<HeroItemDto>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHero(heroItemDto: HeroItemDto)
 

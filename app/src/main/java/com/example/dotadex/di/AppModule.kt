@@ -5,6 +5,7 @@ import com.example.dotadex.data.local.HeroesRoomDatabase
 import com.example.dotadex.data.remote.PostServiceImpl
 import com.example.dotadex.data.remote.repository.HeroRepositoryImpl
 import com.example.dotadex.domain.repository.HeroRepository
+import com.example.dotadex.presentation.hero_detail.HeroDetailViewModel
 import com.example.dotadex.presentation.hero_list.HeroListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,7 +16,7 @@ val appModule = module {
         PostServiceImpl.Companion.create()
     }
 
-    single{
+    single {
         HeroesRoomDatabase.getDatabase(context = androidContext())
     }
 
@@ -31,4 +32,7 @@ val appModule = module {
         HeroListViewModel(repository = get())
     }
 
+    viewModel {
+        HeroDetailViewModel(heroDao = get())
+    }
 }

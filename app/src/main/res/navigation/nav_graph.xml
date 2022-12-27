@@ -18,5 +18,10 @@
         android:id="@+id/heroDetailFragment"
         android:name="com.example.dotadex.presentation.hero_detail.HeroDetailFragment"
         android:label="HeroDetailFragment"
-        tools:layout="@layout/fragment_hero_detail"/>
+        tools:layout="@layout/fragment_hero_detail">
+        <argument
+            android:name="heroId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>
