@@ -1,0 +1,35 @@
+package com.example.dotadex.domain.model
+
+data class HeroDetail(
+    val attack_type : String,
+    val attack_range : Int,
+    val attack_rate : Double,
+    val base_attack_max : Int,
+    val base_attack_min : Int,
+    val base_health : Int,
+    val base_health_regen : Double,
+    val base_mana : Int,
+    val base_mana_regen : Double,
+    val hero_id : Int,
+    val icon : String,
+    val id : Int,
+    val img : String,
+    val localized_name : String,
+    val pro_ban : Int,
+    val pro_pick : Int,
+    val pro_win : Int,
+    val name : String,
+    val primary_attr : String,
+    val roles : List<String>,
+    val base_armor : Double,
+    val base_mr : Int,
+    val move_speed : Int,
+    val turn_rate : Double?,
+    val base_str : Int,
+    val str_gain : Double,
+    val base_agi : Int,
+    val agi_gain : Double,
+    val base_int : Int,
+    val int_gain : Double
+
+)

@@ -15,7 +15,7 @@ import com.example.dotadex.databinding.HeroListItemBinding
 import com.example.dotadex.domain.model.Hero
 
 class HeroListRecyclerAdapter(
-    private var heroClickListener: ( (heroID: Int, imgView: ImageView, txtView: TextView) -> Unit )
+    private var heroClickListener: ( (heroID: Int, heroImg: ImageView, heroName: TextView, primAtr: TextView, proWinPercent: TextView) -> Unit )
 ) : ListAdapter<Hero, HeroListRecyclerAdapter.HeroesListViewHolder>(HeroesDiffUtilCallBack()) {
 
     inner class HeroesListViewHolder(private val binding: HeroListItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -29,7 +29,14 @@ class HeroListRecyclerAdapter(
                 else -> tvPrimaryAttribute.context.getString(R.string.error)
             }
 
-            tvWinRate.text = tvWinRate.context.getString(R.string.win_rate, hero.pro_win)
+            val winPercent = ((hero.pro_win.toDouble() / hero.pro_pick.toDouble()) * 100)
+            tvWinRate.text = tvWinRate.context.getString(R.string.pro_winPercentage, winPercent)
+            if(winPercent >= 50) {
+                tvWinRate.setTextColor(tvWinRate.context.getColor(R.color.health_start))
+            } else {
+                tvWinRate.setTextColor(tvWinRate.context.getColor(R.color.dota_red))
+            }
+
             sivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}"){
                 placeholder(R.drawable.ic_baseline_downloading_24)
                 crossfade(true)
@@ -38,9 +45,11 @@ class HeroListRecyclerAdapter(
 
             ViewCompat.setTransitionName(sivHeroImage, "hero_img_${hero.id}")
             ViewCompat.setTransitionName(tvHeroName, "hero_name_${hero.id}")
+            ViewCompat.setTransitionName(tvPrimaryAttribute, "hero_primary_atr_${hero.id}")
+            ViewCompat.setTransitionName(tvWinRate, "hero_pro_win_percent_${hero.id}")
 
             binding.root.setOnClickListener {
-                heroClickListener(hero.id, sivHeroImage, tvHeroName)
+                heroClickListener(hero.id, sivHeroImage, tvHeroName, tvPrimaryAttribute, tvWinRate)
             }
         }
     }

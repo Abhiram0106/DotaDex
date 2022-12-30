@@ -3,13 +3,9 @@ package com.example.dotadex.presentation.hero_detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dotadex.data.local.HeroDao
-import com.example.dotadex.data.remote.dto.toHero
-import com.example.dotadex.domain.model.Hero
+import com.example.dotadex.data.remote.dto.toHeroDetail
 import com.example.dotadex.domain.model.HeroDetailUiState
-import com.example.dotadex.domain.model.HeroListUiState
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 
 class HeroDetailViewModel(
@@ -26,7 +22,7 @@ class HeroDetailViewModel(
         heroDao.getHeroById(heroID).catch { exception ->
             _stateFlow.value = HeroDetailUiState.Error(exception.message.toString())
         }.collect{ heroItemDto ->
-            _stateFlow.value = HeroDetailUiState.Success(heroItemDto.toHero())
+            _stateFlow.value = HeroDetailUiState.Success(heroItemDto.toHeroDetail())
         }
     }
 }

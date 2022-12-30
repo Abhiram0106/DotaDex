@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/padding_small">
+    android:layout_margin="@dimen/padding_4">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/siv_heroImage"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="@dimen/padding_small"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="@dimen/padding_4"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,7 +22,7 @@
         android:id="@+id/tv_heroName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_small"
+        android:layout_marginStart="@dimen/padding_4"
         app:layout_constraintBottom_toTopOf="@+id/tv_primaryAttribute"
         app:layout_constraintStart_toEndOf="@id/siv_heroImage"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +42,7 @@
         android:id="@+id/tv_winRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_small"
+        android:layout_margin="@dimen/padding_4"
         app:layout_constraintBottom_toBottomOf="@id/siv_heroImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/siv_heroImage"

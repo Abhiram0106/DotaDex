@@ -1,4 +1,17 @@
 <resources>
+    <string name="content_hero_img">Hero Image</string>
+    <string name="content_hero_icon">Hero Icon</string>
+    <string name="content_str_atr">Strength Attribute</string>
+    <string name="content_agi_atr">Agility Attribute</string>
+    <string name="content_int_atr">Intelligence Attribute</string>
+    <string name="content_attack_dmg">Attack Damage</string>
+    <string name="content_attack_rate">Attack Rate</string>
+    <string name="content_attack_range">Attack Range</string>
+    <string name="content_armour">Armour</string>
+    <string name="content_magic_res">Magic Resistance</string>
+    <string name="content_move_speed">Movement Speed</string>
+    <string name="content_turn_rate">Movement Turn Rate</string>
+
     <string name="app_name">DotaDex</string>
     <string name="hero_name">%1$s</string>
     <string name="primary_attribute">%1$s</string>
@@ -8,6 +21,40 @@
     <string name="intelligence">Intelligence</string>
     <string name="error">Error</string>
 
+    <string name="base_health">%1$d</string>
+    <string name="base_health_regen">+%1$.2f</string>
+    <string name="base_mana">%1$d</string>
+    <string name="base_mana_regen">+%1$.2f</string>
+
+    <string name="roles">%1$s</string>
+
+    <string name="base_str">%1$d</string>
+    <string name="str_gain">+%1$.2f</string>
+    <string name="base_agi">%1$d</string>
+    <string name="agi_gain">+%1$.2f</string>
+    <string name="base_int">%1$d</string>
+    <string name="int_gain">+%1$.2f</string>
+
+    <string name="stats">STATS</string>
+    <string name="attack">Attack</string>
+    <string name="defence">Defence</string>
+    <string name="mobility">Mobility</string>
+
+    <string name="attack_dmg">%1$d-%2$d</string>
+    <string name="attack_rate">%1$.2f</string>
+    <string name="attack_range">%1$d</string>
+    
+    <string name="armour">%1$.2f</string>
+    <string name="magic_res">%1$d</string>
+
+    <string name="move_speed">%1$d</string>
+    <string name="turn_rate">%1$.2f</string>
+
+    <string name="pro_scene">Pro Scene</string>
+    <string name="pro_wins">Pro Wins %1$d</string>
+    <string name="pro_ban">Pro Bans %1$d</string>
+    <string name="pro_pick">Pro Picks %1$d</string>
+    <string name="pro_winPercentage">%1$.2f %%</string>
 
 
 </resources>

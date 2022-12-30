@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_large">20sp</dimen>
-    <dimen name="text_small">12sp</dimen>
-    <dimen name="padding_small">4dp</dimen>
+    <dimen name="text_36">36sp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="text_12">12sp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="corner_radius">20dp</dimen>
+    <dimen name="elevation">10dp</dimen>
+    <dimen name="elevation_max">12dp</dimen>
 </resources>

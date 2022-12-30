@@ -3,6 +3,7 @@ package com.example.dotadex.data.remote.dto
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.dotadex.domain.model.Hero
+import com.example.dotadex.domain.model.HeroDetail
 
 @kotlinx.serialization.Serializable
 @Entity(tableName = "heroes_table")
@@ -64,17 +65,47 @@ data class HeroItemDto(
 
 fun HeroItemDto.toHero(): Hero {
     return Hero(
+        hero_id = hero_id,
+        id = id,
+        img = img,
+        localized_name = localized_name,
+        pro_win = pro_win,
+        primary_attr = primary_attr,
+        pro_pick = pro_pick
+    )
+}
+
+fun HeroItemDto.toHeroDetail(): HeroDetail {
+    return HeroDetail(
         attack_type = attack_type,
+        attack_range = attack_range,
+        attack_rate = attack_rate,
+        base_attack_max = base_attack_max,
+        base_attack_min = base_attack_min,
         base_health = base_health,
+        base_health_regen = base_health_regen,
         base_mana = base_mana,
+        base_mana_regen = base_mana_regen,
         hero_id = hero_id,
         icon = icon,
         id = id,
         img = img,
         localized_name = localized_name,
+        pro_ban = pro_ban,
+        pro_pick = pro_pick,
         pro_win = pro_win,
         name = name,
         primary_attr = primary_attr,
-        roles = roles
+        roles = roles,
+        base_armor = base_armor,
+        base_mr = base_mr,
+        move_speed = move_speed,
+        turn_rate = turn_rate,
+        base_str = base_str,
+        str_gain = str_gain,
+        base_agi = base_agi,
+        agi_gain = agi_gain,
+        base_int = base_int,
+        int_gain = int_gain
     )
 }
