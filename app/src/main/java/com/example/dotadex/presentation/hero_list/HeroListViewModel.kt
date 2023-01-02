@@ -26,10 +26,31 @@ class HeroListViewModel(
         _stateFlow.value = HeroListUiState.Loading
 
         repository.getHeroes().catch { exception ->
-            _stateFlow.value = HeroListUiState.Error(exception.message.toString())
-            Log.d("HeroListUiState.Error", exception.message.toString())
+            _stateFlow.value = HeroListUiState.Error("fetchHeroes ${exception.message}")
+            Log.d("HeroListUiState.Error", "fetchHeroes ${exception.message}")
         }.collect { heroesList ->
-            _stateFlow.value = HeroListUiState.Success(heroesList.map { it.toHero() })
+            _stateFlow.value = HeroListUiState.Success(heroList = heroesList.map { it.toHero() })
+        }
+    }
+
+    fun fetchHeroByName(heroName: String?) = viewModelScope.launch {
+        _stateFlow.value = HeroListUiState.Loading
+
+        if(heroName.isNullOrEmpty()) {
+            repository.getHeroesOffline().catch {  exception ->
+                _stateFlow.value = HeroListUiState.Error("fetchHeroByName ${exception.message}")
+                Log.d("HeroListUiState.Error", "fetchHeroByName ${exception.message}")
+            }.collect{ heroList ->
+                _stateFlow.value = HeroListUiState.Success(heroList = heroList.map { it.toHero() })
+            }
+            return@launch
+        }
+
+        repository.getHeroByName(heroName).catch { exception ->
+            _stateFlow.value = HeroListUiState.Error("fetchHeroByName ${exception.message}")
+            Log.d("HeroListUiState.Error", "fetchHeroByName ${exception.message}")
+        }.collect{ heroList ->
+            _stateFlow.value = HeroListUiState.Success(heroList = heroList.map { it.toHero() })
         }
     }
 

@@ -10,11 +10,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HeroDao {
 
-    @Query("SELECT * FROM heroes_table ORDER BY id ASC")
+    @Query("SELECT * FROM heroes_table ORDER BY hero_id DESC")
     fun getHeroes(): Flow<List<HeroItemDto>>
 
     @Query("SELECT * FROM heroes_table WHERE id = :heroID")
     fun getHeroById(heroID: Int): Flow<HeroItemDto>
+
+    @Query("SELECT * FROM heroes_table WHERE localized_name LIKE :name || '%'")
+    fun getHeroByName(name: String): Flow<List<HeroItemDto>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHero(heroItemDto: HeroItemDto)

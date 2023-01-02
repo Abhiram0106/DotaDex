@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView.OnQueryTextListener
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -59,22 +60,36 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                 viewModel.stateFlow.collect {
                     when (it) {
                         is HeroListUiState.Success -> {
-                            Snackbar.make(view, "Success", Snackbar.LENGTH_SHORT).show()
-                            Log.d("HeroListUiState", it.heroList.toString())
+//                            Snackbar.make(view, "Success", Snackbar.LENGTH_SHORT).show()
+                            Log.d("HeroListUiState.Success", it.heroList.toString())
                             heroListAdapter.submitList(it.heroList)
                         }
                         is HeroListUiState.Error -> {
-                            Snackbar.make(view, it.message, Snackbar.LENGTH_SHORT).show()
-                            Log.d("HeroListUiState", it.message)
+//                            Snackbar.make(view, it.message, Snackbar.LENGTH_SHORT).show()
+                            Log.d("HeroListUiState.Error", it.message)
                         }
                         is HeroListUiState.Loading -> {
-                            Snackbar.make(view, "Loading", Snackbar.LENGTH_SHORT).show()
+//                            Snackbar.make(view, "Loading", Snackbar.LENGTH_SHORT).show()
+                            Log.d("HeroListUiState.Loading","loading")
+                            heroListAdapter.submitList(emptyList())
                         }
                         else -> Unit
                     }
                 }
             }
         }
+
+        binding.svSearchHeroes.setOnQueryTextListener(object : OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.fetchHeroByName(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.fetchHeroByName(newText)
+                return true
+            }
+        })
 
 
         binding.rvHeroList.apply {

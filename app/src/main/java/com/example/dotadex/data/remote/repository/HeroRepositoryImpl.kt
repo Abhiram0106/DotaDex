@@ -23,6 +23,9 @@ class HeroRepositoryImpl(
 //        TODO : check for internet connection using work manager to decide data source
     }
 
+    override suspend fun getHeroesOffline(): Flow<List<HeroItemDto>> {
+        return heroDao.getHeroes()
+    }
 
     @WorkerThread
     override suspend fun insertHero(heroItemDto: HeroItemDto) {
@@ -40,4 +43,8 @@ class HeroRepositoryImpl(
         return heroDao.getHeroById(heroID)
     }
 
+
+    override suspend fun getHeroByName(heroName: String): Flow<List<HeroItemDto>> {
+        return heroDao.getHeroByName(heroName)
+    }
 }
