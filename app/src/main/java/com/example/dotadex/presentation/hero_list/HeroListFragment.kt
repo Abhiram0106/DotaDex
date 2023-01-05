@@ -60,7 +60,6 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                 viewModel.stateFlow.collect {
                     when (it) {
                         is HeroListUiState.Success -> {
-//                            Snackbar.make(view, "Success", Snackbar.LENGTH_SHORT).show()
                             Log.d("HeroListUiState.Success", it.heroList.toString())
                             heroListAdapter.submitList(it.heroList)
                         }
@@ -69,7 +68,6 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                             Log.d("HeroListUiState.Error", it.message)
                         }
                         is HeroListUiState.Loading -> {
-//                            Snackbar.make(view, "Loading", Snackbar.LENGTH_SHORT).show()
                             Log.d("HeroListUiState.Loading","loading")
                             heroListAdapter.submitList(emptyList())
                         }

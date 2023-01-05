@@ -3,6 +3,7 @@ package com.example.dotadex.presentation.hero_list
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dotadex.common.ResourceState
 import com.example.dotadex.data.remote.dto.toHero
 import com.example.dotadex.domain.model.Hero
 import com.example.dotadex.domain.model.HeroListUiState
@@ -25,11 +26,19 @@ class HeroListViewModel(
     private fun fetchHeroes() = viewModelScope.launch {
         _stateFlow.value = HeroListUiState.Loading
 
-        repository.getHeroes().catch { exception ->
-            _stateFlow.value = HeroListUiState.Error("fetchHeroes ${exception.message}")
-            Log.d("HeroListUiState.Error", "fetchHeroes ${exception.message}")
-        }.collect { heroesList ->
-            _stateFlow.value = HeroListUiState.Success(heroList = heroesList.map { it.toHero() })
+        repository.getHeroes().collect { heroesList ->
+            _stateFlow.value = when(heroesList) {
+                is ResourceState.Success -> {
+                    HeroListUiState.Success(heroList = heroesList.data!!.map { it.toHero() })
+                }
+
+                is ResourceState.Failure -> {
+                    HeroListUiState.Error(message = heroesList.message!!)
+                }
+
+                else -> {
+                    HeroListUiState.Error(message = heroesList.message!!) }
+            }
         }
     }
 

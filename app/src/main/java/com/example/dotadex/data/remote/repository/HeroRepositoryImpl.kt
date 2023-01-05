@@ -1,6 +1,8 @@
 package com.example.dotadex.data.remote.repository
 
+import android.util.Log
 import androidx.annotation.WorkerThread
+import com.example.dotadex.common.ResourceState
 import com.example.dotadex.data.local.HeroDao
 import com.example.dotadex.data.remote.PostServiceImpl
 import com.example.dotadex.data.remote.dto.HeroItemDto
@@ -14,12 +16,19 @@ class HeroRepositoryImpl(
     ) : HeroRepository {
 
 
-    override suspend fun getHeroes(): Flow<List<HeroItemDto>> {
-        val heroList = service.getHeroes()
-        insertHero(heroList)
-        val heroListAsFlow = listOf(heroList).asFlow()
-        return heroListAsFlow
+    override suspend fun getHeroes(): Flow<ResourceState<List<HeroItemDto>>> = flow {
+        val heroListResourceState = service.getHeroes()
 
+        when(heroListResourceState) {
+            is ResourceState.Success -> {
+                heroListResourceState.data?.let { insertHero(it) }
+                emit(heroListResourceState)
+            }
+            is ResourceState.Failure -> {
+                emit(heroListResourceState)
+            }
+            else -> { Unit }
+        }
 //        TODO : check for internet connection using work manager to decide data source
     }
 
