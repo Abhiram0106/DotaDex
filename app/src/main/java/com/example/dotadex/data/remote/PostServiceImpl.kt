@@ -10,21 +10,22 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.serialization.kotlinx.json.*
 
 class PostServiceImpl(
     private val client: HttpClient
 ) {
     suspend fun getHeroes() : ResourceState<List<HeroItemDto>> {
-       val response = client.get(urlString = Constants.HERO_STATS)
-
-        return when(response.status.value) {
-            in 200..299 -> ResourceState.Success(response.body())
-            else -> ResourceState.Failure("${response.status.value}:${response.status.description}")
+        try {
+            val response = client.get(urlString = Constants.HERO_STATS)
+            return when(response.status.value) {
+                in 200..299 -> ResourceState.Success(response.body())
+                else -> ResourceState.Failure("${response.status.value}:${response.status.description}")
+            }
+        }catch (c: Throwable) {
+            Log.e(Constants.TAG, "getHeroes: $c")
         }
-
-//        TODO : Manage network errors, propagate errors to user
+        return ResourceState.Failure("0:no internet connection")
     }
 
     companion object {

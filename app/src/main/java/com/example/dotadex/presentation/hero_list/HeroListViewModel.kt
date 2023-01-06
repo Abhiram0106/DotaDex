@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dotadex.common.ResourceState
 import com.example.dotadex.data.remote.dto.toHero
-import com.example.dotadex.domain.model.Hero
 import com.example.dotadex.domain.model.HeroListUiState
 import com.example.dotadex.domain.repository.HeroRepository
 import kotlinx.coroutines.flow.*
@@ -46,11 +45,14 @@ class HeroListViewModel(
         _stateFlow.value = HeroListUiState.Loading
 
         if(heroName.isNullOrEmpty()) {
-            repository.getHeroesOffline().catch {  exception ->
-                _stateFlow.value = HeroListUiState.Error("fetchHeroByName ${exception.message}")
-                Log.d("HeroListUiState.Error", "fetchHeroByName ${exception.message}")
-            }.collect{ heroList ->
-                _stateFlow.value = HeroListUiState.Success(heroList = heroList.map { it.toHero() })
+            val heroesList = repository.getHeroesOffline()
+            _stateFlow.value = when(heroesList) {
+                is ResourceState.Success -> {
+                    HeroListUiState.Success(heroList = heroesList.data!!.map { it.toHero() })
+                }
+                else -> {
+                    HeroListUiState.Error(message = "Database Fetch Error")
+                }
             }
             return@launch
         }

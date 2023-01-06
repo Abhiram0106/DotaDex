@@ -64,7 +64,7 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                             heroListAdapter.submitList(it.heroList)
                         }
                         is HeroListUiState.Error -> {
-//                            Snackbar.make(view, it.message, Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(view, it.message, Snackbar.LENGTH_SHORT).show()
                             Log.d("HeroListUiState.Error", it.message)
                         }
                         is HeroListUiState.Loading -> {

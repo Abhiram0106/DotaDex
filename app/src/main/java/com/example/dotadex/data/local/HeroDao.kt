@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface HeroDao {
 
     @Query("SELECT * FROM heroes_table ORDER BY hero_id DESC")
-    fun getHeroes(): Flow<List<HeroItemDto>>
+    fun getHeroes(): List<HeroItemDto>
 
     @Query("SELECT * FROM heroes_table WHERE id = :heroID")
     fun getHeroById(heroID: Int): Flow<HeroItemDto>

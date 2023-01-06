@@ -1,13 +1,16 @@
 package com.example.dotadex.data.remote.repository
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import com.example.dotadex.common.ResourceState
 import com.example.dotadex.data.local.HeroDao
 import com.example.dotadex.data.remote.PostServiceImpl
 import com.example.dotadex.data.remote.dto.HeroItemDto
 import com.example.dotadex.domain.repository.HeroRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 
 
 class HeroRepositoryImpl(
@@ -22,18 +25,20 @@ class HeroRepositoryImpl(
         when(heroListResourceState) {
             is ResourceState.Success -> {
                 heroListResourceState.data?.let { insertHero(it) }
-                emit(heroListResourceState)
+                emit(getHeroesOffline())
             }
             is ResourceState.Failure -> {
                 emit(heroListResourceState)
             }
-            else -> { Unit }
+            else -> {  }
         }
-//        TODO : check for internet connection using work manager to decide data source
     }
 
-    override suspend fun getHeroesOffline(): Flow<List<HeroItemDto>> {
-        return heroDao.getHeroes()
+    override suspend fun getHeroesOffline(): ResourceState<List<HeroItemDto>> {
+        val job = withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            ResourceState.Success(heroDao.getHeroes())
+        }
+        return job
     }
 
     @WorkerThread
