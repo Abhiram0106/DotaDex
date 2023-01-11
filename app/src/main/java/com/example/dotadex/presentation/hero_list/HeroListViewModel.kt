@@ -65,4 +65,29 @@ class HeroListViewModel(
         }
     }
 
+    fun filterList(filter: List<String>) = viewModelScope.launch{
+        _stateFlow.value = HeroListUiState.Loading
+
+        if(filter.isEmpty()) {
+            val heroesList = repository.getHeroesOffline()
+            _stateFlow.value = when(heroesList) {
+                is ResourceState.Success -> {
+                    HeroListUiState.Success(heroList = heroesList.data!!.map { it.toHero() })
+                }
+                else -> {
+                    HeroListUiState.Error(message = "Database Fetch Error")
+                }
+            }
+            return@launch
+        }
+
+        repository.filterListByAttribute(filter).catch { exception ->
+            _stateFlow.value = HeroListUiState.Error("filterListByAttribute ${exception.message}")
+            Log.d("HeroListUiState.Error", "filterListByAttribute ${exception.message}")
+        }.collect{ heroList ->
+            _stateFlow.value = HeroListUiState.Success(heroList = heroList.map { it.toHero() })
+        }
+
+    }
+
 }

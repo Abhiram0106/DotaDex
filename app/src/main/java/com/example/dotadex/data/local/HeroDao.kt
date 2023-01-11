@@ -19,6 +19,9 @@ interface HeroDao {
     @Query("SELECT * FROM heroes_table WHERE localized_name LIKE :name || '%'")
     fun getHeroByName(name: String): Flow<List<HeroItemDto>>
 
+    @Query("SELECT * FROM heroes_table WHERE primary_attr IN (:filter)")
+    fun filterByAttribute(filter: List<String>): Flow<List<HeroItemDto>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHero(heroItemDto: HeroItemDto)
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="attributes">
+        <item>str</item>
+        <item>agi</item>
+        <item>int</item>
+    </string-array>
+
+</resources>

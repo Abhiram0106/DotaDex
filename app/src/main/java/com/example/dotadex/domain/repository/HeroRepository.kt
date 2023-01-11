@@ -12,5 +12,6 @@ interface HeroRepository {
     suspend fun insertHero(listOfHeroItemDto: List<HeroItemDto>)
     suspend fun getHeroById(heroID: Int) : Flow<HeroItemDto>
     suspend fun getHeroByName(heroName: String) : Flow<List<HeroItemDto>>
+    suspend fun filterListByAttribute(filter: List<String>) : Flow<List<HeroItemDto>>
 
 }

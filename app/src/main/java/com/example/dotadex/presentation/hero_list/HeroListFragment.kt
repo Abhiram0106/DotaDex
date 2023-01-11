@@ -1,5 +1,6 @@
 package com.example.dotadex.presentation.hero_list
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -95,6 +96,53 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                 LinearLayoutManager(binding.rvHeroList.context, RecyclerView.VERTICAL, false)
             hasFixedSize()
             adapter = heroListAdapter
+        }
+
+        binding.rvHeroList.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+            Log.d("scroll", "scrollX=$scrollX, scrollY=$scrollY, oldScrollX=$oldScrollX, oldScrollY=$oldScrollY")
+
+            if (oldScrollY > 0) {
+                binding.fabFilter.show()
+            } else if (oldScrollY < 0 && binding.fabFilter.isShown) {
+                binding.fabFilter.hide()
+            }
+        }
+
+        binding.fabFilter.setOnClickListener {
+
+            val selectedItems = mutableListOf<Int>()
+
+            val dialogueBuilder = AlertDialog.Builder(requireContext())
+            dialogueBuilder.setTitle(R.string.filter_dialogue_title)
+                .setMultiChoiceItems(R.array.attributes, null) { dialog, which, isChecked ->
+                    if (isChecked) {
+                        // If the user checked the item, add it to the selected items
+                        selectedItems.add(which)
+                    } else if (selectedItems.contains(which)) {
+                        // Else, if the item is already in the array, remove it
+                        selectedItems.remove(which)
+                    }
+                }
+
+                .setPositiveButton(R.string.ok) { dialog, id ->
+                    val filter = mutableListOf<String>()
+                    selectedItems.forEach {
+                        when (it) {
+                            0 -> filter.add("str")
+                            1 -> filter.add("agi")
+                            2 -> filter.add("int")
+                        }
+                    }
+                    viewModel.filterList(filter)
+                }
+                .setNegativeButton(R.string.cancel) { dialog, id ->
+//                    Nothing
+                }
+
+            dialogueBuilder.create().show()
+
+
         }
 
         (view.parent as? ViewGroup)?.doOnPreDraw {

@@ -20,6 +20,7 @@
     <string name="strength">Strength</string>
     <string name="intelligence">Intelligence</string>
     <string name="error">Error</string>
+    <string name="filter_list">filter list</string>
 
     <string name="base_health">%1$d</string>
     <string name="base_health_regen">+%1$.2f</string>
@@ -55,6 +56,10 @@
     <string name="pro_ban">Pro Bans %1$d</string>
     <string name="pro_pick">Pro Picks %1$d</string>
     <string name="pro_winPercentage">%1$.2f %%</string>
+
+    <string name="filter_dialogue_title">Filter by attribute</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

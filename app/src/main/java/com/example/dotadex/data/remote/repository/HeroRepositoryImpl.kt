@@ -61,4 +61,8 @@ class HeroRepositoryImpl(
     override suspend fun getHeroByName(heroName: String): Flow<List<HeroItemDto>> {
         return heroDao.getHeroByName(heroName)
     }
+
+    override suspend fun filterListByAttribute(filter: List<String>): Flow<List<HeroItemDto>> {
+        return heroDao.filterByAttribute(filter)
+    }
 }
