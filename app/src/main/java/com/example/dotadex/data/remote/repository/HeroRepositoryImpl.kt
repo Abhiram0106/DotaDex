@@ -29,6 +29,7 @@ class HeroRepositoryImpl(
             }
             is ResourceState.Failure -> {
                 emit(heroListResourceState)
+                emit(getHeroesOffline())
             }
             else -> {  }
         }

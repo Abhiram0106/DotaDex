@@ -25,7 +25,7 @@ class PostServiceImpl(
         }catch (c: Throwable) {
             Log.e(Constants.TAG, "getHeroes: $c")
         }
-        return ResourceState.Failure("0:no internet connection")
+        return ResourceState.Failure("No internet connection")
     }
 
     companion object {
