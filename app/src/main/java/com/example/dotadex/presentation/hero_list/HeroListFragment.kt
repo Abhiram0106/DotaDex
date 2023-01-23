@@ -1,6 +1,5 @@
 package com.example.dotadex.presentation.hero_list
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dotadex.R
 import com.example.dotadex.databinding.FragmentHeroListBinding
 import com.example.dotadex.domain.model.HeroListUiState
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,7 +65,8 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                             heroListAdapter.submitList(it.heroList)
                         }
                         is HeroListUiState.Error -> {
-                            Snackbar.make(view, "${it.message}, loading local", Snackbar.LENGTH_LONG).show()
+//                            Snackbar interferes with Fab testing
+//                            Snackbar.make(view, "${it.message}, loading local", Snackbar.LENGTH_LONG).show()
                             Log.d("HeroListUiState.Error", it.message)
                         }
                         is HeroListUiState.Loading -> {
@@ -113,7 +114,7 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
 
             val selectedItems = mutableListOf<Int>()
 
-            val dialogueBuilder = AlertDialog.Builder(requireContext())
+            val dialogueBuilder = MaterialAlertDialogBuilder(requireContext())
             dialogueBuilder.setTitle(R.string.filter_dialogue_title)
                 .setMultiChoiceItems(R.array.attributes, null) { dialog, which, isChecked ->
                     if (isChecked) {
