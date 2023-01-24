@@ -59,10 +59,9 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
             ).collect {
                 when (it) {
                     is HeroDetailUiState.Error -> {
-                        Snackbar.make(view, it.message, Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(view, "Error ${it.message}", Snackbar.LENGTH_SHORT).show()
                     }
                     is HeroDetailUiState.Loading -> {
-                        Snackbar.make(view, "Loading", Snackbar.LENGTH_SHORT).show()
                     }
                     is HeroDetailUiState.Success -> {
                         setUI(it.hero)

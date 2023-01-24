@@ -18,7 +18,6 @@ import com.example.dotadex.R
 import com.example.dotadex.databinding.FragmentHeroListBinding
 import com.example.dotadex.domain.model.HeroListUiState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,7 +37,6 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
 
         val heroListAdapter = HeroListRecyclerAdapter(
             heroClickListener = { heroID, heroImg, heroName, primAtr, proWinPercent ->
-                Snackbar.make(view, heroID.toString(), Snackbar.LENGTH_SHORT).show()
                 val action =
                     HeroListFragmentDirections.actionHeroListFragmentToHeroDetailFragment(heroID)
                 val extras = FragmentNavigatorExtras(

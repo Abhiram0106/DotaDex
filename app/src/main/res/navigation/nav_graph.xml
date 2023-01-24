@@ -13,6 +13,7 @@
         <action
             android:id="@+id/action_heroListFragment_to_heroDetailFragment"
             app:destination="@id/heroDetailFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/heroDetailFragment"
