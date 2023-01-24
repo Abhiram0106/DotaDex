@@ -31,7 +31,8 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val animation = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        val animation =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
         sharedElementEnterTransition = animation
         sharedElementReturnTransition = animation
     }
@@ -92,22 +93,24 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
 
             tvHeroName.text = getString(R.string.hero_name, hero.localized_name)
 
-            val hp = hero.base_health + (hero.base_str*20)
+            val hp = hero.base_health + (hero.base_str * 20)
             tvHealthBase.text = getString(R.string.base_health, hp)
-            val hpRegen = hero.base_health_regen + (hero.base_str*0.1)
+            val hpRegen = hero.base_health_regen + (hero.base_str * 0.1)
             tvHealthRegen.text = getString(R.string.base_health_regen, hpRegen)
 
-            val mana = hero.base_mana + (hero.base_int*12)
+            val mana = hero.base_mana + (hero.base_int * 12)
             tvManaBase.text = getString(R.string.base_mana, mana)
-            val manaRegen = hero.base_mana_regen + (hero.base_int*0.05)
+            val manaRegen = hero.base_mana_regen + (hero.base_int * 0.05)
             tvManaRegen.text = getString(R.string.base_mana_regen, manaRegen)
 
-            tvPrimaryAttribute.text = getString(R.string.primary_attribute, when(hero.primary_attr) {
-                "str" -> "Strength"
-                "agi" -> "Agility"
-                "int" -> "Intelligence"
-                else -> "Error"
-            })
+            tvPrimaryAttribute.text = getString(
+                R.string.primary_attribute, when (hero.primary_attr) {
+                    "str" -> "Strength"
+                    "agi" -> "Agility"
+                    "int" -> "Intelligence"
+                    else -> "Error"
+                }
+            )
             tvRoles.text = getString(R.string.roles, hero.roles)
 
             tvStrBase.text = getString(R.string.base_str, hero.base_str)
@@ -119,7 +122,8 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
             tvIntBase.text = getString(R.string.base_int, hero.base_int)
             tvIntGain.text = getString(R.string.int_gain, hero.int_gain)
 
-            tvAttackDmg.text = getString(R.string.attack_dmg, hero.base_attack_min, hero.base_attack_max)
+            tvAttackDmg.text =
+                getString(R.string.attack_dmg, hero.base_attack_min, hero.base_attack_max)
             tvAttackRange.text = getString(R.string.attack_range, hero.attack_range)
             tvAttackRate.text = getString(R.string.attack_rate, hero.attack_rate)
 
@@ -135,7 +139,7 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
 
             val winPercent = ((hero.pro_win.toDouble() / hero.pro_pick.toDouble()) * 100)
             tvWinPercentage.text = getString(R.string.pro_winPercentage, winPercent)
-            if(winPercent >= 50) {
+            if (winPercent >= 50) {
                 tvWinPercentage.setTextColor(tvWinPercentage.context.getColor(R.color.health_start))
             } else {
                 tvWinPercentage.setTextColor(tvWinPercentage.context.getColor(R.color.dota_red))

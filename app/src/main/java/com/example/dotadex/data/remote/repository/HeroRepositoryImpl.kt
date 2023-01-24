@@ -16,13 +16,12 @@ import kotlinx.coroutines.withContext
 class HeroRepositoryImpl(
     private val service: PostServiceImpl,
     private val heroDao: HeroDao
-    ) : HeroRepository {
+) : HeroRepository {
 
 
     override suspend fun getHeroes(): Flow<ResourceState<List<HeroItemDto>>> = flow {
-        val heroListResourceState = service.getHeroes()
 
-        when(heroListResourceState) {
+        when (val heroListResourceState = service.getHeroes()) {
             is ResourceState.Success -> {
                 heroListResourceState.data?.let { insertHero(it) }
                 emit(getHeroesOffline())
@@ -31,7 +30,7 @@ class HeroRepositoryImpl(
                 emit(heroListResourceState)
                 emit(getHeroesOffline())
             }
-            else -> {  }
+            else -> {}
         }
     }
 

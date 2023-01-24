@@ -15,14 +15,16 @@ import com.example.dotadex.databinding.HeroListItemBinding
 import com.example.dotadex.domain.model.Hero
 
 class HeroListRecyclerAdapter(
-    private var heroClickListener: ( (heroID: Int, heroImg: ImageView, heroName: TextView, primAtr: TextView, proWinPercent: TextView) -> Unit )
+    private var heroClickListener: ((heroID: Int, heroImg: ImageView, heroName: TextView, primAtr: TextView, proWinPercent: TextView) -> Unit)
 ) : ListAdapter<Hero, HeroListRecyclerAdapter.HeroesListViewHolder>(HeroesDiffUtilCallBack()) {
 
-    inner class HeroesListViewHolder(private val binding: HeroListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HeroesListViewHolder(private val binding: HeroListItemBinding) :
+
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(hero: Hero) = binding.apply {
             tvHeroName.text = hero.localized_name
 
-            tvPrimaryAttribute.text = when(hero.primary_attr) {
+            tvPrimaryAttribute.text = when (hero.primary_attr) {
                 "agi" -> tvPrimaryAttribute.context.getString(R.string.agility)
                 "str" -> tvPrimaryAttribute.context.getString(R.string.strength)
                 "int" -> tvPrimaryAttribute.context.getString(R.string.intelligence)
@@ -31,13 +33,13 @@ class HeroListRecyclerAdapter(
 
             val winPercent = ((hero.pro_win.toDouble() / hero.pro_pick.toDouble()) * 100)
             tvWinRate.text = tvWinRate.context.getString(R.string.pro_winPercentage, winPercent)
-            if(winPercent >= 50) {
+            if (winPercent >= 50) {
                 tvWinRate.setTextColor(tvWinRate.context.getColor(R.color.health_start))
             } else {
                 tvWinRate.setTextColor(tvWinRate.context.getColor(R.color.dota_red))
             }
 
-            sivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}"){
+            sivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}") {
                 placeholder(R.drawable.ic_baseline_downloading_24)
                 crossfade(true)
                 crossfade(400)

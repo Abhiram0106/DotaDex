@@ -11,6 +11,6 @@ class Converter {
 
     @TypeConverter
     fun fromStringToStringList(value: String): List<String> {
-        return listOf<String>(value)
+        return listOf(value)
     }
 }

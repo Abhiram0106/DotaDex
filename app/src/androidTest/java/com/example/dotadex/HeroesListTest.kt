@@ -25,18 +25,18 @@ class HeroesListTest {
         onView(withId(R.id.rv_heroList))
             .perform(
                 RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
-                    hasDescendant(withText("Anti-Mage")),
+                    hasDescendant(withText("Anti-Mage"))
                 )
             )
             .perform(
                 RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
-                    hasDescendant(withText("Zeus")),
+                    hasDescendant(withText("Zeus"))
                 )
             )
     }
 
     @Test
-    fun searchHeroesExpectNecrophos() {
+    fun searchHeroes_ExpectNecrophos() {
         onView(
             withId(
                 Resources.getSystem().getIdentifier(
@@ -50,7 +50,7 @@ class HeroesListTest {
         onView(withId(R.id.rv_heroList))
             .perform(
                 RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
-                    hasDescendant(withText("Necrophos")),
+                    hasDescendant(withText("Necrophos"))
                 )
             )
     }
@@ -82,7 +82,7 @@ class HeroesListTest {
 //    }
 
     @Test(expected = PerformException::class)
-    fun filterListExpectStrOnly() {
+    fun filterList_ExpectStrOnly() {
         onView(withId(R.id.fab_filter)).check(matches(isDisplayed()))
             .perform(click())
 
@@ -109,7 +109,7 @@ class HeroesListTest {
     }
 
     @Test(expected = PerformException::class)
-    fun filterListExpectAgiOnly() {
+    fun filterList_ExpectAgiOnly() {
         onView(withId(R.id.fab_filter)).check(matches(isDisplayed()))
             .perform(click())
 
@@ -135,7 +135,7 @@ class HeroesListTest {
     }
 
     @Test(expected = PerformException::class)
-    fun filterListExpectIntOnly() {
+    fun filterList_ExpectIntOnly() {
         onView(withId(R.id.fab_filter)).check(matches(isDisplayed()))
             .perform(click())
 
@@ -161,7 +161,7 @@ class HeroesListTest {
     }
 
     @Test(expected = PerformException::class)
-    fun filterListExpectAgiAndIntOnly() {
+    fun filterList_ExpectAgiAndIntOnly() {
         onView(withId(R.id.fab_filter)).check(matches(isDisplayed()))
             .perform(click())
 

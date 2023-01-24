@@ -15,14 +15,14 @@ import io.ktor.serialization.kotlinx.json.*
 class PostServiceImpl(
     private val client: HttpClient
 ) {
-    suspend fun getHeroes() : ResourceState<List<HeroItemDto>> {
+    suspend fun getHeroes(): ResourceState<List<HeroItemDto>> {
         try {
             val response = client.get(urlString = Constants.HERO_STATS)
-            return when(response.status.value) {
+            return when (response.status.value) {
                 in 200..299 -> ResourceState.Success(response.body())
                 else -> ResourceState.Failure("${response.status.value}:${response.status.description}")
             }
-        }catch (c: Throwable) {
+        } catch (c: Throwable) {
             Log.e(Constants.TAG, "getHeroes: $c")
         }
         return ResourceState.Failure("No internet connection")

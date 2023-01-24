@@ -13,7 +13,11 @@ class HeroDetailViewModel(
 ) : ViewModel() {
 
     private val _stateFlow = MutableStateFlow<HeroDetailUiState>(HeroDetailUiState.Empty)
-    val stateFlow: StateFlow<HeroDetailUiState> = _stateFlow.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), HeroDetailUiState.Empty)
+    val stateFlow: StateFlow<HeroDetailUiState> = _stateFlow.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000L),
+        HeroDetailUiState.Empty
+    )
 
 
     fun getHeroById(heroID: Int) = viewModelScope.launch {
@@ -21,7 +25,7 @@ class HeroDetailViewModel(
 
         heroDao.getHeroById(heroID).catch { exception ->
             _stateFlow.value = HeroDetailUiState.Error(exception.message.toString())
-        }.collect{ heroItemDto ->
+        }.collect { heroItemDto ->
             _stateFlow.value = HeroDetailUiState.Success(heroItemDto.toHeroDetail())
         }
     }

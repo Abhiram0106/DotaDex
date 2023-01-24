@@ -39,8 +39,14 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
         val heroListAdapter = HeroListRecyclerAdapter(
             heroClickListener = { heroID, heroImg, heroName, primAtr, proWinPercent ->
                 Snackbar.make(view, heroID.toString(), Snackbar.LENGTH_SHORT).show()
-                val action = HeroListFragmentDirections.actionHeroListFragmentToHeroDetailFragment(heroID)
-                val extras = FragmentNavigatorExtras(heroImg to "detail_img", heroName to "detail_name", primAtr to "detail_primary_atr", proWinPercent to "detail_pro_win_percent")
+                val action =
+                    HeroListFragmentDirections.actionHeroListFragmentToHeroDetailFragment(heroID)
+                val extras = FragmentNavigatorExtras(
+                    heroImg to "detail_img",
+                    heroName to "detail_name",
+                    primAtr to "detail_primary_atr",
+                    proWinPercent to "detail_pro_win_percent"
+                )
                 findNavController().navigate(
                     action,
                     extras
@@ -70,7 +76,7 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                             Log.d("HeroListUiState.Error", it.message)
                         }
                         is HeroListUiState.Loading -> {
-                            Log.d("HeroListUiState.Loading","loading")
+                            Log.d("HeroListUiState.Loading", "loading")
                             heroListAdapter.submitList(emptyList())
                         }
                         else -> Unit
@@ -79,7 +85,7 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
             }
         }
 
-        binding.svSearchHeroes.setOnQueryTextListener(object : OnQueryTextListener{
+        binding.svSearchHeroes.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.fetchHeroByName(query)
                 return true
@@ -101,7 +107,10 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
 
         binding.rvHeroList.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
 
-            Log.d("scroll", "scrollX=$scrollX, scrollY=$scrollY, oldScrollX=$oldScrollX, oldScrollY=$oldScrollY")
+            Log.d(
+                "scroll",
+                "scrollX=$scrollX, scrollY=$scrollY, oldScrollX=$oldScrollX, oldScrollY=$oldScrollY"
+            )
 
             if (oldScrollY > 0) {
                 binding.fabFilter.show()

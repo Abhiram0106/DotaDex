@@ -90,11 +90,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 
 //    Koin
-    def koin_android_version= "3.3.1"
+    def koin_android_version = "3.3.1"
     implementation "io.insert-koin:koin-android:$koin_android_version"
     implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
     implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
-    def koin_ktor= "3.2.2"
+    def koin_ktor = "3.2.2"
     // Koin for Ktor
     implementation "io.insert-koin:koin-ktor:$koin_ktor"
     // SLF4J Logger
@@ -118,5 +118,9 @@ dependencies {
 
 //    RecyclerView testing
     implementation "androidx.test.espresso:espresso-contrib:3.5.1"
+
+//    Coroutine testing
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
 
 }

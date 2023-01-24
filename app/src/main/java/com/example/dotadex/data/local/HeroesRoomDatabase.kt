@@ -7,7 +7,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.dotadex.data.remote.dto.HeroItemDto
 
-@Database(entities = [HeroItemDto::class], version = 1) //exportSchema in app gradle android{ javaCompileOptions{} }
+@Database(
+    entities = [HeroItemDto::class],
+    version = 1
+) //exportSchema in app gradle android{ javaCompileOptions{} }
 @TypeConverters(Converter::class)
 abstract class HeroesRoomDatabase : RoomDatabase() {
 
