@@ -60,6 +60,7 @@
     <string name="filter_dialogue_title">Filter by attribute</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="search_hint">Search for a Hero</string>
 
 
 </resources>
