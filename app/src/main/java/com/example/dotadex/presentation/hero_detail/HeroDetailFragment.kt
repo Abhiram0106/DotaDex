@@ -141,7 +141,7 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
             if (winPercent >= 50) {
                 tvWinPercentage.setTextColor(tvWinPercentage.context.getColor(R.color.health_start))
             } else {
-                tvWinPercentage.setTextColor(tvWinPercentage.context.getColor(R.color.dota_red))
+                tvWinPercentage.setTextColor(tvWinPercentage.context.getColor(R.color.DotaRed))
             }
         }
     }

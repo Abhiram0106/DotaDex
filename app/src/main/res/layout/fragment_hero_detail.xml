@@ -238,17 +238,20 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_4"
                 android:layout_marginTop="@dimen/padding_4"
+                android:paddingBottom="@dimen/padding_4"
                 android:text="@string/attack"
                 app:layout_constraintEnd_toStartOf="@+id/tv_headingDefence"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_Headingstats" />
 
             <ImageView
+                android:id="@+id/iv_attackDmg"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="@dimen/padding_4"
+                app:layout_constraintEnd_toEndOf="@id/tv_headingAttack"
                 android:contentDescription="@string/content_attack_dmg"
                 app:layout_constraintBottom_toBottomOf="@id/tv_attackDmg"
                 app:layout_constraintStart_toEndOf="@id/tv_attackDmg"
@@ -259,16 +262,18 @@
                 android:id="@+id/tv_attackDmg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_4"
                 android:text="@string/attack_dmg"
+                app:layout_constraintEnd_toStartOf="@id/iv_attackDmg"
                 app:layout_constraintStart_toStartOf="@id/tv_headingAttack"
                 app:layout_constraintTop_toBottomOf="@id/tv_headingAttack" />
 
             <ImageView
+                android:id="@+id/iv_attackRate"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="@dimen/padding_4"
                 android:contentDescription="@string/content_attack_rate"
+                app:layout_constraintEnd_toEndOf="@id/tv_headingAttack"
                 app:layout_constraintBottom_toBottomOf="@id/tv_attackRate"
                 app:layout_constraintStart_toEndOf="@id/tv_attackRate"
                 app:layout_constraintTop_toTopOf="@id/tv_attackRate"
@@ -278,16 +283,18 @@
                 android:id="@+id/tv_attackRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_4"
                 android:text="@string/attack_rate"
+                app:layout_constraintEnd_toStartOf="@id/iv_attackRate"
                 app:layout_constraintStart_toStartOf="@id/tv_headingAttack"
                 app:layout_constraintTop_toBottomOf="@id/tv_attackDmg" />
 
             <ImageView
+                android:id="@+id/iv_attack_Range"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="@dimen/padding_4"
                 android:contentDescription="@string/content_attack_range"
+                app:layout_constraintEnd_toEndOf="@id/tv_headingAttack"
                 app:layout_constraintBottom_toBottomOf="@id/tv_attackRange"
                 app:layout_constraintStart_toEndOf="@id/tv_attackRange"
                 app:layout_constraintTop_toTopOf="@id/tv_attackRange"
@@ -297,8 +304,8 @@
                 android:id="@+id/tv_attackRange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_4"
                 android:text="@string/attack_range"
+                app:layout_constraintEnd_toStartOf="@id/iv_attack_Range"
                 app:layout_constraintStart_toStartOf="@id/tv_headingAttack"
                 app:layout_constraintTop_toBottomOf="@id/tv_attackRate" />
 
@@ -308,6 +315,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_4"
+                android:paddingBottom="@dimen/padding_4"
                 android:text="@string/defence"
                 app:layout_constraintBottom_toBottomOf="@id/tv_headingAttack"
                 app:layout_constraintEnd_toStartOf="@+id/tv_headingMobility"
@@ -316,6 +324,8 @@
                 app:layout_constraintTop_toTopOf="@id/tv_headingAttack" />
 
             <ImageView
+                android:id="@+id/iv_armour"
+                app:layout_constraintEnd_toEndOf="@id/tv_headingDefence"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="@dimen/padding_4"
@@ -328,16 +338,18 @@
             <TextView
                 android:id="@+id/tv_armour"
                 android:layout_width="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/iv_armour"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_4"
                 android:text="@string/armour"
                 app:layout_constraintStart_toStartOf="@id/tv_headingDefence"
                 app:layout_constraintTop_toBottomOf="@id/tv_headingDefence" />
 
             <ImageView
+                android:id="@+id/iv_magicRes"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="@dimen/padding_4"
+                app:layout_constraintEnd_toEndOf="@id/tv_headingDefence"
                 android:contentDescription="@string/content_magic_res"
                 app:layout_constraintBottom_toBottomOf="@id/tv_margicRes"
                 app:layout_constraintStart_toEndOf="@id/tv_margicRes"
@@ -348,8 +360,8 @@
                 android:id="@+id/tv_margicRes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_4"
                 android:text="@string/magic_res"
+                app:layout_constraintEnd_toStartOf="@id/iv_magicRes"
                 app:layout_constraintStart_toStartOf="@id/tv_headingDefence"
                 app:layout_constraintTop_toBottomOf="@id/tv_armour" />
 
@@ -359,6 +371,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_4"
+                android:paddingBottom="@dimen/padding_4"
                 android:text="@string/mobility"
                 app:layout_constraintBottom_toBottomOf="@id/tv_headingAttack"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -367,12 +380,14 @@
                 app:layout_constraintTop_toTopOf="@id/tv_headingAttack" />
 
             <ImageView
+                android:id="@+id/iv_moveSpeed"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="@dimen/padding_4"
                 android:contentDescription="@string/content_move_speed"
+                app:layout_constraintEnd_toEndOf="@id/tv_headingMobility"
                 app:layout_constraintBottom_toBottomOf="@id/tv_moveSpeed"
-                app:layout_constraintEnd_toStartOf="@id/tv_moveSpeed"
+                app:layout_constraintStart_toEndOf="@id/tv_moveSpeed"
                 app:layout_constraintTop_toTopOf="@id/tv_moveSpeed"
                 app:srcCompat="@drawable/icon_movement_speed" />
 
@@ -380,26 +395,28 @@
                 android:id="@+id/tv_moveSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_4"
                 android:text="@string/move_speed"
+                app:layout_constraintEnd_toStartOf="@id/iv_moveSpeed"
                 app:layout_constraintStart_toStartOf="@id/tv_headingMobility"
                 app:layout_constraintTop_toBottomOf="@id/tv_headingMobility" />
 
             <ImageView
+                android:id="@+id/iv_turnRate"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="@dimen/padding_4"
                 android:contentDescription="@string/content_turn_rate"
+                app:layout_constraintEnd_toEndOf="@id/tv_headingMobility"
                 app:layout_constraintBottom_toBottomOf="@id/tv_turnRate"
-                app:layout_constraintEnd_toStartOf="@id/tv_turnRate"
+                app:layout_constraintStart_toEndOf="@id/tv_turnRate"
                 app:layout_constraintTop_toTopOf="@id/tv_turnRate"
                 app:srcCompat="@drawable/icon_turn_rate" />
 
             <TextView
                 android:id="@+id/tv_turnRate"
+                app:layout_constraintEnd_toStartOf="@id/iv_turnRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_4"
                 android:text="@string/turn_rate"
                 app:layout_constraintStart_toStartOf="@id/tv_headingMobility"
                 app:layout_constraintTop_toBottomOf="@id/tv_moveSpeed" />

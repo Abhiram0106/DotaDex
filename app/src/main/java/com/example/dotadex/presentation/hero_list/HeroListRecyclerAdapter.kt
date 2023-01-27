@@ -36,7 +36,7 @@ class HeroListRecyclerAdapter(
             if (winPercent >= 50) {
                 tvWinRate.setTextColor(tvWinRate.context.getColor(R.color.health_start))
             } else {
-                tvWinRate.setTextColor(tvWinRate.context.getColor(R.color.dota_red))
+                tvWinRate.setTextColor(tvWinRate.context.getColor(R.color.DotaRed))
             }
 
             sivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}") {
