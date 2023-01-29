@@ -16,6 +16,6 @@ Heroes can be searched, sorted or filtered based on their names and attributes.
 ---
 
 # Tests
-[HeroDaoTest](https://github.com/Abhiram0106/DotaDex//blod/master/app/src/androidTest/java/com/example/dotadex/HeroDaoTest.kt)
-[HeroDetailsTest](https://github.com/Abhiram0106/DotaDex//blod/master/app/src/androidTest/java/com/example/dotadex/HeroDetailsTest.kt)
-[HeroListTest](https://github.com/Abhiram0106/DotaDex//blod/master/app/src/androidTest/java/com/example/dotadex/HeroListTest.kt)
+1. [HeroDaoTest](https://github.com/Abhiram0106/DotaDex//blod/master/app/src/androidTest/java/com/example/dotadex/HeroDaoTest.kt)
+2. [HeroDetailsTest](https://github.com/Abhiram0106/DotaDex//blod/master/app/src/androidTest/java/com/example/dotadex/HeroDetailsTest.kt)
+3. [HeroListTest](https://github.com/Abhiram0106/DotaDex//blod/master/app/src/androidTest/java/com/example/dotadex/HeroListTest.kt)
