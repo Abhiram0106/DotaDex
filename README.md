@@ -24,4 +24,5 @@ Heroes can be searched, sorted or filtered based on their names and attributes.
 # API
 ---
 [https://docs.opendota.com/](https://docs.opendota.com/)
+
 [https://api.opendota.com/api/heroStats](https://api.opendota.com/api/heroStats)
