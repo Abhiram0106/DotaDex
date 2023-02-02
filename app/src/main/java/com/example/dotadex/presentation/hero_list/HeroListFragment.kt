@@ -18,6 +18,7 @@ import com.example.dotadex.R
 import com.example.dotadex.databinding.FragmentHeroListBinding
 import com.example.dotadex.domain.model.HeroListUiState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -70,7 +71,11 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                         }
                         is HeroListUiState.Error -> {
 //                            Snackbar interferes with Fab testing
-//                            Snackbar.make(view, "${it.message}, loading local", Snackbar.LENGTH_LONG).show()
+                            Snackbar.make(
+                                view,
+                                "${it.message}, loading local",
+                                Snackbar.LENGTH_LONG
+                            ).show()
                             Log.d("HeroListUiState.Error", it.message)
                         }
                         is HeroListUiState.Loading -> {

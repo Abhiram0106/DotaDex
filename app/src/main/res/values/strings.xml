@@ -44,7 +44,7 @@
     <string name="attack_dmg">%1$d-%2$d</string>
     <string name="attack_rate">%1$.2f</string>
     <string name="attack_range">%1$d</string>
-    
+
     <string name="armour">%1$.2f</string>
     <string name="magic_res">%1$d</string>
 
@@ -55,7 +55,7 @@
     <string name="pro_wins">Pro Wins %1$d</string>
     <string name="pro_ban">Pro Bans %1$d</string>
     <string name="pro_pick">Pro Picks %1$d</string>
-    <string name="pro_winPercentage">%1$.2f %%</string>
+    <string name="pro_winPercentage">%1$.2f %% win rate</string>
 
     <string name="filter_dialogue_title">Filter by attribute</string>
     <string name="ok">OK</string>

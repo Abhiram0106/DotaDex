@@ -40,7 +40,6 @@ class HeroListRecyclerAdapter(
             }
 
             sivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}") {
-                placeholder(R.drawable.ic_baseline_downloading_24)
                 crossfade(true)
                 crossfade(400)
             }

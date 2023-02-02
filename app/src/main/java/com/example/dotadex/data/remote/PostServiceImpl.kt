@@ -10,6 +10,7 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 
 class PostServiceImpl(
@@ -17,7 +18,16 @@ class PostServiceImpl(
 ) {
     suspend fun getHeroes(): ResourceState<List<HeroItemDto>> {
         try {
-            val response = client.get(urlString = Constants.HERO_STATS)
+
+            val response = client.get {
+                url {
+                    protocol = URLProtocol.HTTPS
+                    host = Constants.BASE_URL
+                    appendPathSegments(Constants.API_PATH, Constants.HERO_STATS)
+                }
+            }
+
+//            val response = client.get(urlString = Constants.HERO_STATS)
             return when (response.status.value) {
                 in 200..299 -> ResourceState.Success(response.body())
                 else -> ResourceState.Failure("${response.status.value}:${response.status.description}")
