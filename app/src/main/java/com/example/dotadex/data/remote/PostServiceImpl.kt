@@ -27,7 +27,6 @@ class PostServiceImpl(
                 }
             }
 
-//            val response = client.get(urlString = Constants.HERO_STATS)
             return when (response.status.value) {
                 in 200..299 -> ResourceState.Success(response.body())
                 else -> ResourceState.Failure("${response.status.value}:${response.status.description}")

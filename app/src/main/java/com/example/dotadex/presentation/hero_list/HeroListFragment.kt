@@ -63,28 +63,27 @@ HeroListFragment : Fragment(R.layout.fragment_hero_list) {
                 lifecycle = lifecycle,
                 minActiveState = Lifecycle.State.STARTED
             ).collect {
-                viewModel.stateFlow.collect {
-                    when (it) {
-                        is HeroListUiState.Success -> {
-                            Log.d("HeroListUiState.Success", it.heroList.toString())
-                            heroListAdapter.submitList(it.heroList)
-                        }
-                        is HeroListUiState.Error -> {
-//                            Snackbar interferes with Fab testing
-                            Snackbar.make(
-                                view,
-                                "${it.message}, loading local",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                            Log.d("HeroListUiState.Error", it.message)
-                        }
-                        is HeroListUiState.Loading -> {
-                            Log.d("HeroListUiState.Loading", "loading")
-                            heroListAdapter.submitList(emptyList())
-                        }
-                        else -> Unit
+                when (it) {
+                    is HeroListUiState.Success -> {
+                        Log.d("HeroListUiState.Success", it.heroList.toString())
+                        heroListAdapter.submitList(it.heroList)
                     }
+                    is HeroListUiState.Error -> {
+//                            Snackbar interferes with Fab testing
+                        Snackbar.make(
+                            view,
+                            "${it.message}, loading local",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                        Log.d("HeroListUiState.Error", it.message)
+                    }
+                    is HeroListUiState.Loading -> {
+                        Log.d("HeroListUiState.Loading", "loading")
+                        heroListAdapter.submitList(emptyList())
+                    }
+                    else -> Unit
                 }
+
             }
         }
 
