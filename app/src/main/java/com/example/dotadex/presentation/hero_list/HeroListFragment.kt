@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.SearchView.OnQueryTextListener
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,16 +20,16 @@ import com.example.dotadex.databinding.FragmentHeroListBinding
 import com.example.dotadex.domain.model.HeroListUiState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class
-HeroListFragment : Fragment(R.layout.fragment_hero_list) {
+@AndroidEntryPoint
+class HeroListFragment : Fragment(R.layout.fragment_hero_list) {
 
     private var _binding: FragmentHeroListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HeroListViewModel by viewModel<HeroListViewModel>()
+    private val viewModel: HeroListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -5,10 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.dotadex.data.local.HeroDao
 import com.example.dotadex.data.remote.dto.toHeroDetail
 import com.example.dotadex.domain.model.HeroDetailUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HeroDetailViewModel(
+@HiltViewModel
+class HeroDetailViewModel @Inject constructor(
     private val heroDao: HeroDao
 ) : ViewModel() {
 

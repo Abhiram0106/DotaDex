@@ -7,10 +7,13 @@ import com.example.dotadex.common.ResourceState
 import com.example.dotadex.data.remote.dto.toHero
 import com.example.dotadex.domain.model.HeroListUiState
 import com.example.dotadex.domain.repository.HeroRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HeroListViewModel(
+@HiltViewModel
+class HeroListViewModel @Inject constructor(
     private val repository: HeroRepository
 ) : ViewModel() {
 

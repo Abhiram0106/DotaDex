@@ -1,38 +1,42 @@
 package com.example.dotadex.di
 
+import android.app.Application
 import com.example.dotadex.data.local.HeroDao
 import com.example.dotadex.data.local.HeroesRoomDatabase
 import com.example.dotadex.data.remote.PostServiceImpl
 import com.example.dotadex.data.remote.repository.HeroRepositoryImpl
 import com.example.dotadex.domain.repository.HeroRepository
-import com.example.dotadex.presentation.hero_detail.HeroDetailViewModel
-import com.example.dotadex.presentation.hero_list.HeroListViewModel
-import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-val appModule = module {
-    single {
-        PostServiceImpl.Companion.create()
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideHeroesService(): PostServiceImpl {
+        return PostServiceImpl.create()
     }
 
-    single {
-        HeroesRoomDatabase.getDatabase(context = androidContext())
+//    @Provides
+//    @Singleton
+//    fun provideHeroDatabase(app: Application): HeroesRoomDatabase {
+//        HeroesRoomDatabase.getDatabase(context = app)
+//    }
+
+    @Provides
+    @Singleton
+    fun provideHeroDatabase(app: Application): HeroDao {
+        return HeroesRoomDatabase.getDatabase(context = app).heroDao()
     }
 
-    single<HeroDao> {
-        HeroesRoomDatabase.getDatabase(context = androidContext()).heroDao()
-    }
-
-    single<HeroRepository> {
-        HeroRepositoryImpl(service = get(), heroDao = get())
-    }
-
-    viewModel {
-        HeroListViewModel(repository = get())
-    }
-
-    viewModel {
-        HeroDetailViewModel(heroDao = get())
+    @Provides
+    @Singleton
+    fun provideHeroRepository(service: PostServiceImpl, heroDao: HeroDao): HeroRepository {
+        return HeroRepositoryImpl(service, heroDao)
     }
 }

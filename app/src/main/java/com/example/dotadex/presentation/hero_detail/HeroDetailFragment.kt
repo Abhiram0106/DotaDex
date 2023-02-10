@@ -5,6 +5,7 @@ import android.transition.TransitionInflater
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,9 +17,10 @@ import com.example.dotadex.databinding.FragmentHeroDetailBinding
 import com.example.dotadex.domain.model.HeroDetail
 import com.example.dotadex.domain.model.HeroDetailUiState
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
 
     private var _binding: FragmentHeroDetailBinding? = null
@@ -26,7 +28,7 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
 
     private val args: HeroDetailFragmentArgs by navArgs()
 
-    private val viewModel: HeroDetailViewModel by viewModel<HeroDetailViewModel>()
+    private val viewModel: HeroDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,13 +81,11 @@ class HeroDetailFragment : Fragment(R.layout.fragment_hero_detail) {
         binding.apply {
 
             ivHeroImage.load("${Constants.HERO_RESOURCE_PREPEND}${hero.img}") {
-                placeholder(R.drawable.ic_baseline_downloading_24)
                 crossfade(true)
                 crossfade(400)
             }
 
             ivHeroIcon.load("${Constants.HERO_RESOURCE_PREPEND}${hero.icon}") {
-                placeholder(R.drawable.ic_baseline_downloading_24)
                 crossfade(true)
                 crossfade(400)
             }
